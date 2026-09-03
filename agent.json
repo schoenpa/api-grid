@@ -1,0 +1,6 @@
+{
+  "name": "API Grid",
+  "catalog": "https://schoenpa.github.io/api-grid/catalog.json",
+  "directory": true,
+  "proxy": false
+}
