@@ -9,7 +9,10 @@
   "listingTermDays": 7,
   "foundingSlots": 10,
   "slotsFilled": 0,
+  "remaining": 10,
   "listings": [],
+  "commits": [],
+  "steals": [],
   "verify": {
     "chainId": 8453,
     "chain": "base",
