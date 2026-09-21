@@ -4,7 +4,7 @@
   "network": "base",
   "asset": "USDC",
   "assetAddress": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
-  "payTo": "0x5b1F29A6cF5ffe8591D154eE597EB14E7f22d024",
+  "payTo": "0x433bc99866b67b10ed75f24367a9fd36093b8632",
   "listingPriceUsdc": "1",
   "listingTermDays": 7,
   "foundingSlots": 10,
@@ -18,7 +18,7 @@
     "chain": "base",
     "token": "USDC",
     "tokenAddress": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
-    "payTo": "0x5b1F29A6cF5ffe8591D154eE597EB14E7f22d024",
+    "payTo": "0x433bc99866b67b10ed75f24367a9fd36093b8632",
     "amount": "1000000",
     "decimals": 6,
     "rule": "Transfer of exactly 1_000_000 USDC units to payTo. Identity = from address. Do not fetch listing URL."
