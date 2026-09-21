@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schoenpa.github.io/api-grid/schemas/probe-response-rev1.json",
+  "title": "EndpointComplianceProbeResponse",
+  "description": "200 response body for POST /v1/probe after settle. Challenge-observation fields only (not full client payment loop).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "returns_402",
+    "signaling_shape",
+    "network",
+    "asset",
+    "latency_ms",
+    "pass"
+  ],
+  "properties": {
+    "returns_402": {
+      "type": "boolean",
+      "description": "True if the target responded with HTTP 402 when challenged (pre-settle observation)."
+    },
+    "signaling_shape": {
+      "type": "string",
+      "description": "Observed payment-challenge signaling shape on the 402 (challenge only; not SIGNATURE/RESPONSE).",
+      "enum": [
+        "x402_payment_required",
+        "mpp_www_authenticate",
+        "dual_x402_mpp",
+        "unknown",
+        "none"
+      ]
+    },
+    "network": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "As-observed from challenge when present; prefer CAIP-2 (e.g. eip155:8453). Do not normalize chain nicknames. Null if absent."
+    },
+    "asset": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "As-observed from challenge when present (address or CAIP-19 string). Null if absent."
+    },
+    "latency_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "End-to-end probe latency in milliseconds."
+    },
+    "pass": {
+      "type": "boolean",
+      "description": "True if the target meets the probe compliance criteria. Clients derive fail as !pass."
+    },
+    "target_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Optional echo of buyer-submitted URL (request field targetUrl)."
+    },
+    "observed_status": {
+      "type": "integer",
+      "minimum": 100,
+      "maximum": 599,
+      "description": "HTTP status observed from the target during the challenge phase."
+    },
+    "raw_challenge_fields": {
+      "type": "object",
+      "description": "Optional non-secret subset of challenge fields. MUST NOT include secrets, PAYMENT-SIGNATURE, Authorization credentials, payment payloads, private keys, or settlement proofs.",
+      "additionalProperties": true
+    },
+    "truncated": {
+      "type": "boolean",
+      "description": "Optional. True if the probe response body was truncated (aligns CISO egress controls)."
+    },
+    "abort_reason": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Optional. Egress/policy abort code only when the probe aborted; null if completed. No secrets."
+    }
+  },
+  "examples": [
+    {
+      "returns_402": true,
+      "signaling_shape": "x402_payment_required",
+      "network": "eip155:8453",
+      "asset": "eip155:8453/erc20:0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+      "latency_ms": 412,
+      "pass": true,
+      "target_url": "https://tools.example.com/premium-analytics",
+      "observed_status": 402,
+      "raw_challenge_fields": {
+        "scheme": "exact"
+      },
+      "truncated": false,
+      "abort_reason": null
+    },
+    {
+      "returns_402": false,
+      "signaling_shape": "none",
+      "network": null,
+      "asset": null,
+      "latency_ms": 180,
+      "pass": false,
+      "observed_status": 200,
+      "truncated": false,
+      "abort_reason": null
+    }
+  ]
+}
