@@ -7,12 +7,13 @@
   "seller_endpoint": "TBD",
   "seller_endpoint_note": "Discovery is published on GitHub Pages ($0). Live HTTP seller host URL is not claimed here. Agents use resource path /v1/probe + accepts[]; when a seller host is deployed, update seller_endpoint and resource absolute URL. Until then, discover via this well-known document and catalog/agent.json on Pages.",
   "discovery": {
-    "well_known": "https://schoenpa.github.io/api-grid/.well-known/x402",
+    "well_known": "https://schoenpa.github.io/api-grid/.well-known/x402.json",
     "schema_rev1": "https://schoenpa.github.io/api-grid/schemas/probe-response-rev1.json",
     "pages_base": "https://schoenpa.github.io/api-grid",
     "agent_json": "https://schoenpa.github.io/api-grid/agent.json",
     "catalog_json": "https://schoenpa.github.io/api-grid/catalog.json",
-    "catalog_note": "Cap-10 catalog remains PARKED honor-only; not sold via this probe discovery."
+    "catalog_note": "Cap-10 catalog remains PARKED honor-only; not sold via this probe discovery.",
+    "well_known_note": "Canonical discovery URL uses .json extension (GitHub Pages serves this reliably). Extensionless /.well-known/x402 remains unsupported on Pages and returns 404."
   },
   "accepted_networks": [
     {
