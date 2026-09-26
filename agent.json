@@ -3,7 +3,7 @@
   "catalog": "https://schoenpa.github.io/api-grid/catalog.json",
   "directory": true,
   "proxy": false,
-  "x402": "https://schoenpa.github.io/api-grid/.well-known/x402",
+  "x402": "https://schoenpa.github.io/api-grid/.well-known/x402.json",
   "probe": {
     "resource": "/v1/probe",
     "schema": "https://schoenpa.github.io/api-grid/schemas/probe-response-rev1.json",
