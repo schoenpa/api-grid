@@ -4,8 +4,8 @@
   "name": "API Grid",
   "description": "HTTPS URL \u2192 402/compliance JSON after x402 settle. Option A Endpoint Compliance Probe (LIVE-READY commercial terms: 0.10 USDC Base, autonomous settle).",
   "commercial_claim": "LIVE-READY",
-  "seller_endpoint": "TBD",
-  "seller_endpoint_note": "Discovery is published on GitHub Pages ($0). Live HTTP seller host URL is not claimed here. Agents use resource path /v1/probe + accepts[]; when a seller host is deployed, update seller_endpoint and resource absolute URL. Until then, discover via this well-known document and catalog/agent.json on Pages.",
+  "seller_endpoint": "https://api-grid-probe.apigrid.workers.dev",
+  "seller_endpoint_note": "CISO CLEAR (cite CEO via CGO). seller_endpoint is the Cloudflare Worker public HTTPS host. LIVE_FETCH=0 \u2014 do not claim fetch-enabled until separately gated. Discovery remains on GitHub Pages ($0). Cap-10 PARKED honor-only. No secrets in Pages.",
   "discovery": {
     "well_known": "https://schoenpa.github.io/api-grid/.well-known/x402.json",
     "schema_rev1": "https://schoenpa.github.io/api-grid/schemas/probe-response-rev1.json",
@@ -56,7 +56,7 @@
       "settle": {
         "mode": "autonomous",
         "rail": "eip3009",
-        "note": "Gas-only relayer; zero HITL per buy. LIVE-READY commercial claim; live host TBD."
+        "note": "Gas-only relayer; zero HITL per buy. LIVE-READY commercial claim; seller_endpoint published; LIVE_FETCH=0."
       },
       "accepts": [
         {
@@ -103,6 +103,8 @@
     "outbound": "CLOSED",
     "sepolia": "CANCELLED",
     "stripe": "FORBIDDEN",
-    "secrets_in_pages": "FORBIDDEN"
-  }
+    "secrets_in_pages": "FORBIDDEN",
+    "live_fetch": 0
+  },
+  "live_fetch": 0
 }

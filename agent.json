@@ -7,6 +7,7 @@
   "probe": {
     "resource": "/v1/probe",
     "schema": "https://schoenpa.github.io/api-grid/schemas/probe-response-rev1.json",
-    "seller_endpoint": "TBD"
+    "seller_endpoint": "https://api-grid-probe.apigrid.workers.dev",
+    "live_fetch": 0
   }
 }
