@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schoenpa.github.io/api-grid/schemas/sla-evidence.json",
+  "title": "SlaEvidence",
+  "description": "Point-in-time payment-liveness SLA evidence overlay for Option A probe 200 (Architect packaging 2026-09-18 + CTO overlay align 2026-09-21). Not a warranty; after ttl_seconds treat as stale. Unsigned era: signer=none, signature=null. latency_pass omitted until a cited threshold exists.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "observed_at",
+    "ttl_seconds",
+    "status_class",
+    "signaling_shape",
+    "latency_ms",
+    "pass",
+    "signer"
+  ],
+  "properties": {
+    "observed_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Seller clock ISO-8601 timestamp when the observation completed."
+    },
+    "ttl_seconds": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Freshness window in seconds. Live-Unlock lock default 300. After TTL buyer must treat evidence as stale (not pass)."
+    },
+    "status_class": {
+      "type": "string",
+      "description": "Coarse liveness class derived from observed_status / abort.",
+      "enum": [
+        "payment_required_402",
+        "success_2xx",
+        "client_4xx",
+        "server_5xx",
+        "unreachable",
+        "blocked"
+      ]
+    },
+    "signaling_shape": {
+      "type": "string",
+      "description": "Pass-through probe rev1 payment-challenge signaling shape.",
+      "enum": [
+        "x402_payment_required",
+        "mpp_www_authenticate",
+        "dual_x402_mpp",
+        "unknown",
+        "none"
+      ]
+    },
+    "latency_ms": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Measured RTT in milliseconds (report-only; no invented latency_pass threshold)."
+    },
+    "latency_pass": {
+      "type": "boolean",
+      "description": "Optional. Whether latency met a cited seller threshold. Omit until CGO/CEO cite N \u2014 do not invent."
+    },
+    "pass": {
+      "type": "boolean",
+      "description": "Overall SLA pass for this observation (payment-liveness / 402-shape criteria \u2014 not uptime %)."
+    },
+    "abort_reason": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Pass-through probe abort_reason; null if completed. No secrets."
+    },
+    "signer": {
+      "type": "string",
+      "description": "Who attests the observation. Use none while challenge-only / unsigned era.",
+      "enum": [
+        "seller",
+        "third_party",
+        "none"
+      ]
+    },
+    "signature": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Optional detached proof. null while unsigned / no keys on box."
+    },
+    "probe_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Optional correlation id for the paid probe call; null OK in docs era."
+    }
+  },
+  "examples": [
+    {
+      "observed_at": "2026-09-21T09:30:00+02:00",
+      "ttl_seconds": 180,
+      "status_class": "payment_required_402",
+      "signaling_shape": "x402_payment_required",
+      "latency_ms": 412,
+      "pass": true,
+      "abort_reason": null,
+      "signer": "none",
+      "signature": null,
+      "probe_ref": null
+    }
+  ]
+}
